@@ -1,0 +1,117 @@
+/*app/assets/stylesheets/battles.scss*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-webkit-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-moz-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-ms-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-webkit-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-moz-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-ms-keyframes move-clouds-back {
+    from {background-position: 0;}
+    to {background-position:10000px 0;}
+}
+.stars, .twinkling {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+.stars {
+  background:#000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+  z-index:0;
+}
+.twinkling{
+  background:transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+  z-index:1;
+  -moz-animation:move-twink-back 200s linear infinite;
+  -ms-animation:move-twink-back 200s linear infinite;
+  -o-animation:move-twink-back 200s linear infinite;
+  -webkit-animation:move-twink-back 200s linear infinite;
+  animation:move-twink-back 200s linear infinite;
+}
+
+#map {
+  height: 400px;
+  width: 800px;
+  border: 5px solid #222;
+  margin: 15px auto;
+  background-color: rgba(255, 235, 31, 0.7);
+  position: relative;
+}
+h1 {
+  text-align: center;
+  margin-top: 60px;
+  color: #CAC0C0;
+  font-family: "Arial", Arial, sans-serif;
+  span {
+    color: #000;
+    -webkit-text-stroke-width: 0.1rem;
+    -webkit-text-stroke-color: rgb(255, 235, 31);
+    font-size: 3rem;
+    font-weight: 800;
+  }
+}
+
+.soldier{
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 65px;
+  width: 60px;
+  position: absolute;
+  vertical-align: bottom;
+  div{
+    margin-top: 65px;
+    padding: 2px;
+    background: #2F2F2F;
+    color: #ddd;
+    font-size: 0.6rem;
+    text-align: center;
+
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}
+.soldier.atack{
+  outline: 4px dotted #F14F29;
+}
+.soldier.die{
+  background-image: url("http://icons.iconarchive.com/icons/csscreme/halloween/128/skull-crossbones-icon.png")!important;
+  background: #929292;
+  background-size: contain;
+}

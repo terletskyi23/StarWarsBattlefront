@@ -1,0 +1,22 @@
+# == Schema Information
+#
+# Table name: heros
+#
+#  id    :integer          not null, primary key
+#  name  :string
+#  y     :integer
+#  x     :integer
+#  image :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  'y': 1
+  x: 1
+
+two:
+  name: MyString
+  'y': 1
+  x: 1
