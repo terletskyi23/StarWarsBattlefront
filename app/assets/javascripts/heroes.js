@@ -1,6 +1,10 @@
 // app/assets/javascripts/heroes.js
 var my_hero_id = null,
     step = 8,
+    height = 65,
+    field_height = 400,
+    width = 60,
+    field_width = 800,
     images = [
       'http://res.cloudinary.com/dtz0cql1c/image/upload/v1454429557/soldier_fcgddn.png',
       'http://res.cloudinary.com/dtz0cql1c/image/upload/v1454429557/dart-moll_yrevyt.png',
@@ -51,34 +55,42 @@ $(document).keydown( function (e) {
   switch (e.which) {
     case 37: // left
       var x = parseInt($('#'+my_hero_id).css('left')) - step;
-      socket.send(JSON.stringify({
-        id: my_hero_id,
-        x: x
-      }));
+      if (x >= 0){
+        socket.send(JSON.stringify({
+          id: my_hero_id,
+          x: x
+        }));
+      }
     break;
 
     case 38: // up
       var y = parseInt($('#'+my_hero_id).css('bottom')) + step;
-      socket.send(JSON.stringify({
-        id: my_hero_id,
-        y: y
-      }));
+      if (y <= field_height - height) {
+        socket.send(JSON.stringify({
+          id: my_hero_id,
+          y: y
+        }));
+      }
     break;
 
     case 39: // right
       var x = parseInt($('#'+my_hero_id).css('left')) + step;
-      socket.send(JSON.stringify({
-        id: my_hero_id,
-        x: x
-      }));
+      if (x <= field_width - width) {
+        socket.send(JSON.stringify({
+          id: my_hero_id,
+          x: x
+        }));
+      }
     break;
 
     case 40: // down
       var y = parseInt($('#'+my_hero_id).css('bottom')) - step;
-      socket.send(JSON.stringify({
-        id: my_hero_id,
-        y: y
-      }));
+      if (y >= 0){
+        socket.send(JSON.stringify({
+          id: my_hero_id,
+          y: y
+        }));
+      }
     break;
 
     case 32: // space
@@ -89,7 +101,7 @@ $(document).keydown( function (e) {
       var enemy_id = [];
       $('.soldier').each(function() {
         if ($(this).attr('id') != my_hero_id){
-          if(intersect($('#'+my_hero_id).position(), $(this).position(), 60, 65)){
+          if(intersect($('#'+my_hero_id).position(), $(this).position(), width, height)){
             enemy_id.push($(this).attr('id'));
             $(this).addClass('die');
             $(this).fadeOut(500, function(){ $(this).remove();});
