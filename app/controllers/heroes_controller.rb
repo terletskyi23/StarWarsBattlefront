@@ -23,10 +23,23 @@ class HeroesController < ApplicationController
 
       tubesock.onmessage do |data|
         params = JSON[data]
-        hero = Hero.find(params.delete('id'))
-        hero.update_attributes(params)
-        Redis.new.publish "move", JSON[hero.attributes] # <-- Redis pub
+        params["atack"]? hero_atack(params) : hero_move(params)
       end
+    end
+  end
+
+  private
+
+  def hero_move(params)
+    hero = Hero.find(params.delete('id'))
+    hero.update_attributes(params)
+    Redis.new.publish "move", JSON[hero.attributes]
+  end
+
+  def hero_atack(params)
+    params["enemys"].map do |enemy_id|
+      enemy = Hero.find(enemy_id)
+      enemy.destroy
     end
   end
 end

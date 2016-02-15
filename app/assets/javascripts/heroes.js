@@ -83,14 +83,61 @@ $(document).keydown( function (e) {
 
     case 32: // space
       $('#'+my_hero_id).addClass('atack');
-      // var y = parseInt($('#'+my_hero_id).css('bottom')) - step;
-      // socket.send(JSON.stringify({
-      //   id: my_hero_id,
-      //   y: y
-      // }));
+      setTimeout(function() {
+        $('#'+my_hero_id).removeClass("atack");
+      }, 200);
+      var enemy_id = [];
+      $('.soldier').each(function() {
+        if ($(this).attr('id') != my_hero_id){
+          if(intersect($('#'+my_hero_id).position(), $(this).position(), 60, 65)){
+            enemy_id.push($(this).attr('id'));
+            $(this).addClass('die');
+            $(this).fadeOut(500, function(){ $(this).remove();});
+          }
+        }
+      });
+      //console.log(enemy_id);
+      var y = parseInt($('#'+my_hero_id).css('bottom')) - step;
+      socket.send(JSON.stringify({
+        id: my_hero_id,
+        atack: true,
+        enemys: enemy_id
+      }));
     break;
 
     default: return; // exit this handler for other keys
   }
   e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+var intersect = function(a,b, width, height){
+  return(
+    (
+      (
+        ( a.left>=b.left && a.left<=b.left + width )||( a.left + width>=b.left && a.left + width<=b.left + width  )
+      ) && (
+        ( a.top>=b.top && a.top<=b.top + height )||( a.top + height>=b.top && a.top + height<=b.top + height )
+      )
+    )||(
+      (
+        ( b.left>=a.left && b.left<=a.left + width )||( b.left + width>=a.left && b.left + width<=a.left + width  )
+      ) && (
+        ( b.top>=a.top && b.top<=a.top + height )||( b.top + height>=a.top && b.top + height<=a.top + height )
+      )
+    )
+  )||(
+    (
+      (
+        ( a.left>=b.left && a.left<=b.left + width )||( a.left + width>=b.left && a.left + width<=b.left + width  )
+      ) && (
+        ( b.top>=a.top && b.top<=a.top + height )||( b.top + height>=a.top && b.top + height<=a.top + height )
+      )
+    )||(
+      (
+        ( b.left>=a.left && b.left<=a.left + width )||( b.left + width>=a.left && b.left + width<=a.left + width  )
+      ) && (
+        ( a.top>=b.top && a.top<=b.top + height )||( a.top + height>=b.top && a.top + height<=b.top + height )
+      )
+    )
+  );
+}

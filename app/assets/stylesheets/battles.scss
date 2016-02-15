@@ -84,7 +84,7 @@ h1 {
 }
 
 .soldier{
-  background-position: center; 
+  background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   height: 65px;
@@ -112,6 +112,6 @@ h1 {
 }
 .soldier.die{
   background-image: url("http://icons.iconarchive.com/icons/csscreme/halloween/128/skull-crossbones-icon.png")!important;
-  background: #929292;
+  /*background: #929292;*/
   background-size: contain;
 }

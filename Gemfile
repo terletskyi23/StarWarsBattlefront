@@ -1,16 +1,24 @@
 source 'https://rubygems.org'
 
-gem "annotate"
+gem 'annotate'
 gem 'puma'
 gem 'tubesock'
-gem 'quiet_assets', group: :development
 gem 'redis'
 gem 'faker'
+gem 'rubocop'
+group :development do
+  gem 'quiet_assets'
+  gem 'pry-rails'
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
